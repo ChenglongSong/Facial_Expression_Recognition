@@ -71,9 +71,6 @@ def prepare_data(data):
 
 
 
-
-
-
 #自定义函数，在图像上展示给定 label 对应的不同表情数据。
 def plot_examples(label):                     #在这个函数中，我们有一个参数 label，该参数表示我们要展示的表情类型。
     fig, axs = plt.subplots(1, 5, figsize=(25, 12))
@@ -300,23 +297,15 @@ keras.backend.set_value(model.optimizer.learning_rate, 0.00001)
 #使用了Keras的backend模块中的set_value()函数，将模型当前的学习率（learning_rate）设为0.00001。
 #这是调整优化器学习率的一种方法，可以通过该方法来降低学习率进而提高训练的精度，有助于避免因为学习率过高造成的训练震荡不收敛的情况。
 
-
-
-
 #重新进行模型训练
 h2 = model.fit(train_images, train_labels, batch_size=256, epochs=30, verbose=1, 
                    validation_data =(valid_images, valid_labels)) 
 #使用model.fit()函数重新进行模型训练，仍然采用batch_size为256、训练次数为30次epochs的训练方式，指定verbose=1让训练过程可以在终端中看到详细输出。
 #此时，我们为了避免模型过度拟合训练数据，使用验证数据（valid_images和valid_labels）进行模型性能的评估，验证的结果将输出到终端中，并且也可以用vis_training()方法进行可视化呈现历史记录（history）的变化情况。
 
-
-
 vis_training([h1, h2])
 #该函数传递了两个历史记录（h1和h2）作为参数，分别代表了模型重新训练之前和之后的历史训练结果。
 #该函数将训练准确性、训练损失、验证准确性和验证损失输出到一组图表中，方便我们直观地了解多种模型的训练效果和性能，并进行比较分析。
-
-
-
 
 #使用训练完成的CNN模型对测试集（test_images和test_labels）进行预测，并输出该模型的测试准确率。
 test_prob = model.predict(test_images) #首先，使用model.predict()函数对测试集的图片数据进行预测，得到每个类别的预测得分，这里将结果保存为test_prob。
@@ -324,7 +313,6 @@ test_pred = np.argmax(test_prob, axis=1) #接着，使用NumPy库中的argmax()�
 test_accuracy = np.mean(test_pred == test_labels) #最后，通过计算预测结果和实际标签相同的样本所占的比例，得到模型的测试准确率并将其保存为test_accuracy，输出在终端上展示。
 
 print(test_accuracy)
-
 
 #计算测试数据(test_data)上情感分类器的混淆矩阵，并将结果以DataFrame形式输出。
 conf_mat = confusion_matrix(test_labels, test_pred)
@@ -336,8 +324,6 @@ pd.DataFrame(conf_mat, columns=emotions.values(), index=emotions.values())
 #第一个参数conf_mat是之前计算得到的混淆矩阵，第二个和第三个参数分别是列索引和行索引，它们都使用情感类型的列表emotions.values()。
 
 #通过这个DataFrame对象，我们可以更方便地分析情感分类器在每个类别上的性能表现，例如哪些类别常常被混淆，哪些类别分类效果最好等等。
-
-
 
 #绘制混淆矩阵的热力图，并显示出来。
 fig, ax = plot_confusion_matrix(conf_mat=conf_mat,
@@ -362,165 +348,4 @@ with open('model.json','w') as json_file:
     
 #将情感分类模型(model)保存为Keras模型文件
 model.save('final_model.h5')
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   
